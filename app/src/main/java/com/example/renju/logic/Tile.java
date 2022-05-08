@@ -13,9 +13,9 @@ public class Tile {
         this.y = y;
     }
 
-    public void setPiece(int color) {
-        owner = color;
-        observer.onSetPiece(color);
+    public void setPiece(int player) {
+        owner = player;
+        if (observer != null) observer.onSetPiece(player);
     }
 
     public int getOwner() {

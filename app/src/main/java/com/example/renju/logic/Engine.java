@@ -68,7 +68,6 @@ public class Engine {
         int second = piecesOnRows.get(1);
         int third = piecesOnRows.get(2);
         int fourth = piecesOnRows.get(3);
-        Log.i("Engine", first + "" + second + "" + third + "" + fourth);
         if (first > 5) return false;
         if (first < 3 || second < 3) return true;
         if (third > 2) return false;

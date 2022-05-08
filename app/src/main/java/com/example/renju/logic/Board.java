@@ -5,7 +5,7 @@ public class Board {
     private Tile[][] tiles;
     private int size;
 
-    Board(int size) {
+    public Board(int size) {
         this.size = size;
         tiles = new Tile[size][size];
         for (int i = 0; i < size; i++) {
@@ -19,8 +19,8 @@ public class Board {
         return size;
     }
 
-    public Tile getTile(int i, int j) {
-        return tiles[i][j];
+    public Tile getTile(int y, int x) {
+        return tiles[y][x];
     }
 
 
