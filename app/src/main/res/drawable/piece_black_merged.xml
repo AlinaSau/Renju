@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/tile_plus" >
+    </item>
+    <item android:drawable="@drawable/piece_black" >
+    </item>
+
+</layer-list>
