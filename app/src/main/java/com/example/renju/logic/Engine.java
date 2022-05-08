@@ -57,8 +57,6 @@ public class Engine {
         turn++;
     }
 
-
-
     public boolean isValidBlackMove(int x, int y) {
         List<Integer> piecesOnRows = new ArrayList<>();
         piecesOnRows.add(board.inHorizontalRow(x, y, Const.BLACK));
@@ -76,58 +74,4 @@ public class Engine {
         if (third > 2) return false;
         return first == 4 && second == 3;
     }
-
-//    public boolean isWinTemplate(int dx, int dy, int player) {
-//        int count = 0;
-//        int row;
-//        int column;
-//
-//        for (int i = 0; i < board.getSize(); i++) {
-//            for (int j = 0; j < board.getSize(); j++) {
-//                if (board.getTile(i, j).getOwner() == player) {
-//                    Log.i("Engine", "i = " + i + "\nj =" + j);
-//                    row = i;
-//                    column = j;
-//                    while (row >= 0 &&
-//                            row < board.getSize() &&
-//                            column >= 0 &&
-//                            column < board.getSize() &&
-//                            board.getTile(row, column).getOwner() == player) {
-//                        Log.i("Engine", row + ":" + column + " count = " + count + " player = " + board.getTile(i, j).getOwner());
-//                        count++;
-//                        row += dy;
-//                        column += dx;
-//                    }
-//                    if (count == 5) {
-//                        Log.i("Engine", "return true");
-//                        return true;
-//                    } else {
-//                        count = 0;
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
-//
-//    public boolean isHorizontalWin(int player) {
-//        return isWinTemplate(1, 0, player);
-//    }
-//
-//    public boolean isVerticalWin(int player) {
-//        return isWinTemplate(0, 1, player);
-//    }
-//
-//    public boolean isDiagonalWin(int player) {
-//        return isWinTemplate(1, 1, player);
-//    }
-//
-//    public boolean isWin(int player) {
-//        return isDiagonalWin(player) || isHorizontalWin(player) || isVerticalWin(player);
-//    }
-
-
-
-
-
 }
