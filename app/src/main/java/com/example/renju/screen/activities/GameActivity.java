@@ -1,5 +1,7 @@
 package com.example.renju.screen.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -43,8 +45,7 @@ public class GameActivity extends AppCompatActivity {
                 if (player == Const.WHITE) winnerName = secondPlayerName;
                 else winnerName = firstPlayerName;
                 LeaderBoard.getInstance(GameActivity.this).playerWon(winnerName);
-                Toast.makeText(GameActivity.this, winnerName + " won", Toast.LENGTH_SHORT).show();
-                onBackPressed();
+                buildMessagePlayerWon(winnerName);
             }
 
             @Override
@@ -59,5 +60,16 @@ public class GameActivity extends AppCompatActivity {
                 engine.processMove(tile.getX(), tile.getY());
             }
         });
+    }
+
+    private void buildMessagePlayerWon(String playerName) {
+        new AlertDialog.Builder(this).setTitle("Player " + playerName + " won")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                })
+                .show();
     }
 }
