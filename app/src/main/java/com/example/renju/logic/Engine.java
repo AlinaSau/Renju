@@ -1,6 +1,10 @@
 package com.example.renju.logic;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.example.renju.screen.activities.GameActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +18,10 @@ public class Engine {
         void onWin(int player);
 
         void onInvalidBlackMove();
+
+        void badMove();
+
+        void boardIsOver();
     }
 
     private int turn = 0;
@@ -24,9 +32,19 @@ public class Engine {
     public Engine(int size) {
         this(size, new Listener() {
             @Override
-            public void onWin(int player) { }
+            public void onWin(int player) {
+            }
+
             @Override
-            public void onInvalidBlackMove() { }
+            public void onInvalidBlackMove() {
+            }
+
+            @Override
+            public void badMove() {
+            }
+            @Override
+            public void boardIsOver() {
+            }
         });
     }
 
@@ -41,20 +59,35 @@ public class Engine {
     }
 
     public void processMove(int x, int y) {
-        int player;
-        if (turn % 2 == 0) player = Const.BLACK;
-        else player = Const.WHITE;
-        int max = board.maxInARow(x, y, player);
-        if (player == Const.WHITE && max > 4)  listener.onWin(player);
-        else if (player == Const.BLACK) {
-            if (!isValidBlackMove(x, y)) {
-                listener.onInvalidBlackMove();
-                return;
+        int player = Const.EMPTY;
+        if (moveToEmptyTile(x, y)) {
+            if (turn % 2 == 0)
+                player = Const.BLACK;
+            else player = Const.WHITE;
+            turn++;
+        } else listener.badMove();
+        if (player != Const.EMPTY) {
+            int max = board.maxInARow(x, y, player);
+            if (player == Const.WHITE && max > 4) listener.onWin(player);
+            else if (player == Const.BLACK) {
+                if (!isValidBlackMove(x, y)) {
+                    listener.onInvalidBlackMove();
+                    turn--;
+                    return;
+                } else if (max == 5) listener.onWin(player);
             }
-            else if (max == 5) listener.onWin(player);
+            board.getTile(y, x).setPiece(player);
         }
-        board.getTile(y, x).setPiece(player);
-        turn++;
+        if (turn == board.getSize()* board.getSize()) listener.boardIsOver();
+    }
+
+    public boolean moveToEmptyTile (int x, int y) {
+        if (board.getTile(y, x).getOwner() != Const.BLACK && board.getTile(y, x).getOwner() != Const.WHITE)
+            return true;
+        else {
+            listener.badMove();
+            return false;
+        }
     }
 
     public boolean isValidBlackMove(int x, int y) {

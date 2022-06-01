@@ -20,7 +20,6 @@ import com.example.renju.screen.TileView;
 public class GameActivity extends AppCompatActivity {
 
 
-
     public static final String BOARD_SIZE = "board size";
     public static final String FIRST_PLAYER = "first player";
     public static final String SECOND_PLAYER = "second player";
@@ -51,6 +50,23 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onInvalidBlackMove() {
                 Toast.makeText(GameActivity.this, "Black are bad", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void badMove() {
+                Toast.makeText(GameActivity.this, "You can't make a move on this tile", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void boardIsOver() {
+                new AlertDialog.Builder(GameActivity.this).setTitle("Board is over. This is the end of the game")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                onBackPressed();
+                            }
+                        })
+                        .show();
             }
         });
         BoardLayout boardLayout = new BoardLayout(tableLayout, this, engine.getBoard());

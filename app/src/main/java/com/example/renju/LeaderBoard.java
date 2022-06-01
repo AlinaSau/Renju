@@ -22,12 +22,13 @@ public class LeaderBoard {
     private Gson gson = new Gson();
 
 
-
     private LeaderBoard(Context context) {
         sharedPreferences = context.getSharedPreferences(PREF, Context.MODE_PRIVATE);
         String leaderBoardMapJson = sharedPreferences.getString(LEADERBOARD_KEY, null);
         if (leaderBoardMapJson == null) leaderBoardMap = new HashMap<>();
-        else leaderBoardMap = gson.fromJson(leaderBoardMapJson, new TypeToken<Map<String, Integer>>() {}.getType());
+        else
+            leaderBoardMap = gson.fromJson(leaderBoardMapJson, new TypeToken<Map<String, Integer>>() {
+            }.getType());
     }
 
     public static LeaderBoard getInstance(Context context) {
@@ -60,14 +61,11 @@ public class LeaderBoard {
 
     public List<String> getLeaderBoardList() {
         List<String> result = new ArrayList<>();
-        for (String name: leaderBoardMap.keySet()) {
+        for (String name : leaderBoardMap.keySet()) {
             result.add(name + "\n" + leaderBoardMap.get(name));
         }
         return result;
     }
-
-
-
 
 
 }

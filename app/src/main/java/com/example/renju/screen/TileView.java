@@ -50,9 +50,6 @@ public class TileView {
     }
 
 
-
-
-
     public void setOnTileClickListener(OnTileClickListener onTileClickListener) {
         listener = onTileClickListener;
     }

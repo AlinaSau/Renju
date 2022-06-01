@@ -28,21 +28,21 @@ public class GameSettingsActivity extends AppCompatActivity {
         nextActivityButton.setOnClickListener(view -> {
             Intent intent = new Intent(GameSettingsActivity.this, GameActivity.class);
 
-            if (!correctEditTexts(firstPlayerNameEditText, secondPlayerNameEditText, boardSize)) return;
+            if (!correctEditTexts(firstPlayerNameEditText, secondPlayerNameEditText, boardSize))
+                return;
             intent.putExtra(BOARD_SIZE, Integer.parseInt(boardSize.getText().toString()));
             intent.putExtra(FIRST_PLAYER, firstPlayerNameEditText.getText().toString());
             intent.putExtra(SECOND_PLAYER, secondPlayerNameEditText.getText().toString());
             startActivity(intent);
         });
     }
-    
+
     private boolean correctEditTexts(EditText firstName, EditText secondName, EditText boardSize) {
         String firstText = firstName.getText().toString();
         String secondText = secondName.getText().toString();
         String size = boardSize.getText().toString();
         return !firstText.isEmpty() && !secondText.isEmpty() && !firstText.equals(secondText) && !size.isEmpty();
     }
-
 
 
 }
